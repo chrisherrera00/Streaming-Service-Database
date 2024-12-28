@@ -1,0 +1,148 @@
+-- Create tables
+create table useraccount
+(userID varchar2(10) not null,
+firstName varchar2(40) not null,
+lastName varchar2(40) not null,
+emailAddress varchar(60) not null,
+language varchar(20) null,
+dateOfBirth date not null,
+phoneNumber varchar(10) null,
+constraint useraccount_pk primary key (userID));
+
+create table subscriptionplan
+(subscriptionType varchar2(10) not null,
+price number(4,2) not null,
+maxDevices number(1) not null,
+offlineDownload number(1) not null,
+CHECK (offlineDownload  IN ('0','1')),
+constraint subscriptionplan_pk primary key (subscriptionType));
+
+create table userpayment
+(paymentType varchar2(12) not null,
+cardID varchar2(20) not null,
+cardNumber varchar2(16) not null,
+expirationDate number(4) not null,
+securityCode number(3) not null,
+nameOnCard varchar2(60) not null,
+billingAddress varchar2(200) not null,
+constraint userpayment_pk primary key (cardID));
+
+create table subscriptioninstance
+(subscriptionID varchar2(25) not null,
+userID varchar2(10) not null,
+beginDate date not null,
+endDate date null,
+renewalDate number(2) not null,
+cardID varchar2(20) not null,
+subscriptionType varchar2(10) not null,
+constraint subscriptioninstance_pk primary key (subscriptionID, userID),
+constraint subscriptioninstance_fk_useraccount foreign key (userID) references useraccount,
+constraint subscriptioninstance_fk_userpayment foreign key (cardID) references userpayment,
+constraint subscriptioninstance_fk_subscriptionplan foreign key (subscriptionType) references subscriptionplan);
+
+
+CREATE TABLE UserProfile (
+	userID VARCHAR2(10) NOT NULL,
+	profileName VARCHAR2(10) NOT NULL, 
+	parentalControl NUMBER(1,0) CHECK (parentalControl IN (0,1)),
+	PRIMARY KEY (userID, profileName),
+	FOREIGN KEY (userID) REFERENCES UserAccount(userID)
+);
+
+CREATE TABLE Genre (
+    genreName VARCHAR2(10) NOT NULL PRIMARY KEY,
+    genreDescription VARCHAR2(500)
+);
+
+CREATE TABLE MediaTitle (
+    titleID VARCHAR2(10) PRIMARY KEY,
+    title VARCHAR2(255) NOT NULL,
+    description VARCHAR2(300),
+    releaseDate DATE,
+    runTime INT,
+    language VARCHAR2(50),
+    contentRating VARCHAR2(10),
+    subtitleAvailable NUMBER(1) DEFAULT 0,
+    popularity DECIMAL(5, 2)
+);
+
+CREATE TABLE GenrePreference (
+    userID VARCHAR2(10) NOT NULL,
+    profileName VARCHAR2(10) NOT NULL,
+    genreName VARCHAR2(10) NOT NULL,
+    PRIMARY KEY (userID, profileName, genreName),
+    FOREIGN KEY (userID, profileName) REFERENCES UserProfile(userID, profileName),
+    FOREIGN KEY (genreName) REFERENCES Genre(genreName)
+);
+
+CREATE TABLE MediaGenre (
+    titleID VARCHAR2(50) NOT NULL,
+    genreName VARCHAR2(10) NOT NULL,
+    PRIMARY KEY (titleID, genreName),
+    FOREIGN KEY (titleID) REFERENCES MediaTitle(titleID),
+    FOREIGN KEY (genreName) REFERENCES Genre(genreName)
+);
+
+CREATE TABLE TV (
+    episodeNumber VARCHAR2(10) NOT NULL,
+    seasonNumber VARCHAR2(10) NOT NULL,
+    titleID VARCHAR2(50) NOT NULL,
+    episodeName VARCHAR2(255),
+    PRIMARY KEY (episodeNumber, seasonNumber, titleID),
+    FOREIGN KEY (titleID) REFERENCES MediaTitle(titleID)
+);
+
+CREATE TABLE Movie (
+    titleID VARCHAR2(10) PRIMARY KEY,
+    FOREIGN KEY (titleID) REFERENCES MediaTitle(titleID)
+);
+
+CREATE TABLE MediaInstance (
+    mediaID VARCHAR2(10) PRIMARY KEY,
+    titleID VARCHAR2(10),
+    FOREIGN KEY (titleID) REFERENCES MediaTitle(titleID)
+);
+
+CREATE TABLE Quality (
+    qualityName VARCHAR2(20) PRIMARY KEY,
+    resolution VARCHAR2(20),
+    aspectRatio VARCHAR2(10)
+);
+
+CREATE TABLE SearchHistory (
+    userID VARCHAR2(10),
+    profileName VARCHAR2(10),
+    mediaID VARCHAR2(10),
+    searchDate DATE,
+    PRIMARY KEY (userID, profileName, mediaID),
+    FOREIGN KEY (userID, profileName) REFERENCES UserProfile(userID, profileName),
+    FOREIGN KEY (mediaID) REFERENCES MediaInstance(mediaID)
+);
+
+CREATE TABLE WatchHistory (
+    userID VARCHAR2(10),
+    profileName VARCHAR2(10),
+    mediaID VARCHAR2(10),
+    watchDate DATE,
+    progress NUMBER(6),
+    isComplete NUMBER(1) CHECK (isComplete IN ('0','1')),
+    PRIMARY KEY (userID, profileName, mediaID, watchDate),
+    FOREIGN KEY (userID, profileName) REFERENCES UserProfile(userID, profileName),
+    FOREIGN KEY (mediaID) REFERENCES MediaInstance(mediaID)
+);
+
+CREATE TABLE UserReviews (
+    reviewID VARCHAR2(10) NOT NULL PRIMARY KEY,
+    userID VARCHAR2(10) NOT NULL,
+    profileName VARCHAR2(10) NOT NULL,
+    titleID VARCHAR2(10),
+    reviewSubject VARCHAR2(20),
+    reviewRating NUMBER(1) CHECK (reviewRating IN (1, 2, 3, 4, 5)),
+    reviewDescription VARCHAR2(1000),
+    FOREIGN KEY (userID, profileName) REFERENCES UserProfile(userID, profileName),
+    FOREIGN KEY (titleID) REFERENCES MediaTitle(titleID)
+);
+
+
+
+

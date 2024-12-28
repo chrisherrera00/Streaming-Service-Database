@@ -1,0 +1,188 @@
+-- Inserting data into the useraccount table
+INSERT INTO useraccount (userID, firstName, lastName, emailAddress, language, dateOfBirth, phoneNumber) 
+VALUES ('U001', 'Alice', 'Johnson', 'alice.johnson@example.com', 'English', TO_DATE('1990-05-12', 'YYYY-MM-DD'), '1234567890');
+
+INSERT INTO useraccount (userID, firstName, lastName, emailAddress, language, dateOfBirth, phoneNumber) 
+VALUES ('U002', 'Bob', 'Smith', 'bob.smith@example.com', 'Spanish', TO_DATE('1985-11-22', 'YYYY-MM-DD'), '9876543210');
+
+INSERT INTO useraccount (userID, firstName, lastName, emailAddress, language, dateOfBirth, phoneNumber) 
+VALUES ('U003', 'Charlie', 'Brown', 'charlie.brown@example.com', 'French', TO_DATE('1992-03-15', 'YYYY-MM-DD'), NULL);
+
+INSERT INTO useraccount (userID, firstName, lastName, emailAddress, language, dateOfBirth, phoneNumber) 
+VALUES ('U004', 'Diana', 'Prince', 'diana.prince@example.com', 'English', TO_DATE('1988-07-30', 'YYYY-MM-DD'), '1122334455');
+
+INSERT INTO useraccount (userID, firstName, lastName, emailAddress, language, dateOfBirth, phoneNumber) 
+VALUES ('U005', 'Ethan', 'Hunt', 'ethan.hunt@example.com', NULL, TO_DATE('1978-01-10', 'YYYY-MM-DD'), '5566778899');
+
+-- Inserting data into the subscriptionplan table
+INSERT INTO subscriptionplan (subscriptionType, price, maxDevices, offlineDownload) 
+VALUES ('Basic', 9.99, 1, 0);
+
+INSERT INTO subscriptionplan (subscriptionType, price, maxDevices, offlineDownload) 
+VALUES ('Standard', 13.99, 2, 1);
+
+INSERT INTO subscriptionplan (subscriptionType, price, maxDevices, offlineDownload) 
+VALUES ('Premium', 17.99, 4, 1);
+
+INSERT INTO subscriptionplan (subscriptionType, price, maxDevices, offlineDownload) 
+VALUES ('Family', 19.99, 5, 1);
+
+INSERT INTO subscriptionplan (subscriptionType, price, maxDevices, offlineDownload) 
+VALUES ('Student', 6.99, 1, 0);
+
+-- Inserting data into the userpayment table
+INSERT INTO userpayment (paymentType, cardID, cardNumber, expirationDate, securityCode, nameOnCard, billingAddress) 
+VALUES ('Credit', 'C001', '1234567812345678', 1225, 123, 'Alice Johnson', '123 Main St, Springfield, IL');
+
+INSERT INTO userpayment (paymentType, cardID, cardNumber, expirationDate, securityCode, nameOnCard, billingAddress) 
+VALUES ('Debit', 'C002', '8765432187654321', 1124, 456, 'Bob Smith', '456 Elm St, Denver, CO');
+
+INSERT INTO userpayment (paymentType, cardID, cardNumber, expirationDate, securityCode, nameOnCard, billingAddress) 
+VALUES ('Credit', 'C003', '5678123456781234', 1026, 789, 'Charlie Brown', '789 Pine St, Boston, MA');
+
+INSERT INTO userpayment (paymentType, cardID, cardNumber, expirationDate, securityCode, nameOnCard, billingAddress) 
+VALUES ('Debit', 'C004', '4321876543218765', 0925, 321, 'Diana Prince', '101 Maple St, Seattle, WA');
+
+INSERT INTO userpayment (paymentType, cardID, cardNumber, expirationDate, securityCode, nameOnCard, billingAddress) 
+VALUES ('Credit', 'C005', '3456127834561278', 1226, 654, 'Ethan Hunt', '202 Oak St, Miami, FL');
+
+-- Inserting data into the subscriptioninstance table
+INSERT INTO subscriptioninstance (subscriptionID, beginDate, endDate, renewalDate, userID, cardID, subscriptionType) 
+VALUES ('S001', TO_DATE('2024-01-01', 'YYYY-MM-DD'), TO_DATE('2024-12-31', 'YYYY-MM-DD'), 12, 'U001', 'C001', 'Basic');
+
+INSERT INTO subscriptioninstance (subscriptionID, beginDate, endDate, renewalDate, userID, cardID, subscriptionType) 
+VALUES ('S002', TO_DATE('2024-02-15', 'YYYY-MM-DD'), TO_DATE('2025-02-14', 'YYYY-MM-DD'), 12, 'U002', 'C002', 'Standard');
+
+INSERT INTO subscriptioninstance (subscriptionID, beginDate, endDate, renewalDate, userID, cardID, subscriptionType) 
+VALUES ('S003', TO_DATE('2023-03-01', 'YYYY-MM-DD'), TO_DATE('2024-02-29', 'YYYY-MM-DD'), 12, 'U003', 'C003', 'Premium');
+
+INSERT INTO subscriptioninstance (subscriptionID, beginDate, endDate, renewalDate, userID, cardID, subscriptionType) 
+VALUES ('S004', TO_DATE('2023-07-01', 'YYYY-MM-DD'), TO_DATE('2024-06-30', 'YYYY-MM-DD'), 12, 'U004', 'C004', 'Family');
+
+INSERT INTO subscriptioninstance (subscriptionID, beginDate, endDate, renewalDate, userID, cardID, subscriptionType) 
+VALUES ('S005', TO_DATE('2024-05-01', 'YYYY-MM-DD'), NULL, 6, 'U005', 'C005', 'Student');
+
+
+
+
+-- Insert data into UserProfile
+INSERT INTO UserProfile (userID, profileName, parentalControl) VALUES ('U001', 'JohnDoe', 0);
+INSERT INTO UserProfile (userID, profileName, parentalControl) VALUES ('U002', 'JaneSmith', 1);
+INSERT INTO UserProfile (userID, profileName, parentalControl) VALUES ('U003', 'Alex123', 0);
+INSERT INTO UserProfile (userID, profileName, parentalControl) VALUES ('U004', 'Chris456', 1);
+INSERT INTO UserProfile (userID, profileName, parentalControl) VALUES ('U005', 'Taylor78', 0);
+
+-- Insert data into Genre
+INSERT INTO Genre (genreName, genreDescription) VALUES ('Action', 'Fast-paced movies with a lot of physical activities and stunts.');
+INSERT INTO Genre (genreName, genreDescription) VALUES ('Comedy', 'Light-hearted and humorous entertainment.');
+INSERT INTO Genre (genreName, genreDescription) VALUES ('Drama', 'Emotionally intense narratives with serious themes.');
+INSERT INTO Genre (genreName, genreDescription) VALUES ('Horror', 'Designed to scare and thrill audiences.');
+INSERT INTO Genre (genreName, genreDescription) VALUES ('Sci-Fi', 'Speculative fiction focusing on futuristic and scientific elements.');
+
+-- Insert data into GenrePreference
+INSERT INTO GenrePreference (userID, profileName, genreName) VALUES ('U001', 'JohnDoe', 'Action');
+INSERT INTO GenrePreference (userID, profileName, genreName) VALUES ('U002', 'JaneSmith', 'Comedy');
+INSERT INTO GenrePreference (userID, profileName, genreName) VALUES ('U003', 'Alex123', 'Drama');
+INSERT INTO GenrePreference (userID, profileName, genreName) VALUES ('U004', 'Chris456', 'Horror');
+INSERT INTO GenrePreference (userID, profileName, genreName) VALUES ('U005', 'Taylor78', 'Sci-Fi');
+
+-- MediaTitle inserts
+INSERT INTO MediaTitle (titleID, title, description, releaseDate, runTime, language, contentRating, subtitleAvailable, popularity)
+VALUES ('T001', 'Inception', 'A mind-bending thriller.', TO_DATE('2010-07-16', 'YYYY-MM-DD'), '148', 'English', 'PG-13', 1, 8.8);
+
+INSERT INTO MediaTitle (titleID, title, description, releaseDate, runTime, language, contentRating, subtitleAvailable, popularity)
+VALUES ('T002', 'The Godfather', 'A story about a powerful crime family.', TO_DATE('1972-03-24', 'YYYY-MM-DD'), '175', 'English', 'R', 1, 9.2);
+
+INSERT INTO MediaTitle (titleID, title, description, releaseDate, runTime, language, contentRating, subtitleAvailable, popularity)
+VALUES ('T003', 'Interstellar', 'A space exploration epic.', TO_DATE('2014-11-07', 'YYYY-MM-DD'), '169', 'English', 'PG-13', 1, 8.6);
+
+INSERT INTO MediaTitle (titleID, title, description, releaseDate, runTime, language, contentRating, subtitleAvailable, popularity)
+VALUES ('T004', 'Parasite', 'A dark comedy about class struggle.', TO_DATE('2019-05-30', 'YYYY-MM-DD'), '132', 'Korean', 'R', 1, 8.5);
+
+INSERT INTO MediaTitle (titleID, title, description, releaseDate, runTime, language, contentRating, subtitleAvailable, popularity)
+VALUES ('T005', 'Avengers: Endgame', 'The epic conclusion to the Marvel saga.', TO_DATE('2019-04-26', 'YYYY-MM-DD'), '181', 'English', 'PG-13', 1, 8.4);
+
+INSERT INTO MediaTitle (titleID, title, description, releaseDate, language, contentRating, subtitleAvailable, popularity)
+VALUES ('T006', 'Game of Thrones', 'A fantasy drama series.', TO_DATE('2011-04-17', 'YYYY-MM-DD'), 'English', 'TV-MA', 1, 9.3);
+
+
+-- MediaGenre inserts
+INSERT INTO MediaGenre (titleID, genreName)
+VALUES ('T001', 'Sci-Fi');
+
+INSERT INTO MediaGenre (titleID, genreName)
+VALUES ('T002', 'Drama');
+
+INSERT INTO MediaGenre (titleID, genreName)
+VALUES ('T003', 'Sci-Fi');
+
+INSERT INTO MediaGenre (titleID, genreName)
+VALUES ('T004', 'Comedy');
+
+INSERT INTO MediaGenre (titleID, genreName)
+VALUES ('T005', 'Action');
+
+INSERT INTO MediaGenre (titleID, genreName) 
+VALUES ('T006', 'Drama');
+
+-- Media Instance inserts
+INSERT INTO MediaInstance (mediaID, titleID) VALUES ('MI001', 'T001');
+INSERT INTO MediaInstance (mediaID, titleID) VALUES ('MI002', 'T002');
+INSERT INTO MediaInstance (mediaID, titleID) VALUES ('MI003', 'T003');
+INSERT INTO MediaInstance (mediaID, titleID) VALUES ('MI004', 'T004');
+INSERT INTO MediaInstance (mediaID, titleID) VALUES ('MI005', 'T005');
+INSERT INTO MediaInstance (mediaID, titleID) VALUES ('MI006', 'T006');
+
+-- Quality Inserts
+INSERT INTO Quality (qualityName, resolution, aspectRatio) VALUES ('SD', '480p', '4:3');
+INSERT INTO Quality (qualityName, resolution, aspectRatio) VALUES ('HD', '1080p', '16:9');
+INSERT INTO Quality (qualityName, resolution, aspectRatio) VALUES ('UHD', '2160p', '16:9');
+
+-- TV inserts
+INSERT INTO TV (titleID, seasonNumber, episodeNumber, episodeName)
+VALUES ('T006', 1, 2, 'The Kingsroad');
+
+INSERT INTO TV (titleID, seasonNumber, episodeNumber, episodeName)
+VALUES ('T006', 3, 5, 'The Rains of Castamere');
+
+INSERT INTO TV (titleID, seasonNumber, episodeNumber, episodeName)
+VALUES ('T006', 2, 1, 'The North Remembers');
+
+INSERT INTO TV (titleID, seasonNumber, episodeNumber, episodeName)
+VALUES ('T006', 4, 10, 'The Children');
+
+-- Movie inserts
+INSERT INTO Movie (titleID)
+VALUES ('T001');
+
+INSERT INTO Movie (titleID)
+VALUES ('T002');
+
+INSERT INTO Movie (titleID)
+VALUES ('T003');
+
+INSERT INTO Movie (titleID)
+VALUES ('T004');
+
+INSERT INTO Movie (titleID)
+VALUES ('T005');
+
+-- Insert data into UserReviews
+INSERT INTO UserReviews (reviewID, userID, profileName, titleID, reviewSubject, reviewRating, reviewDescription) VALUES ('R001', 'U001', 'JohnDoe', 'T001', 'Amazing Movie', 5, 'An outstanding film with great action sequences.');
+INSERT INTO UserReviews (reviewID, userID, profileName, titleID, reviewSubject, reviewRating, reviewDescription) VALUES ('R002', 'U002', 'JaneSmith', 'T002', 'Hilarious', 4, 'A really funny and enjoyable comedy.');
+INSERT INTO UserReviews (reviewID, userID, profileName, titleID, reviewSubject, reviewRating, reviewDescription) VALUES ('R003', 'U003', 'Alex123', 'T003', 'Thought-Provoking', 5, 'A very emotional and gripping drama.');
+INSERT INTO UserReviews (reviewID, userID, profileName, titleID, reviewSubject, reviewRating, reviewDescription) VALUES ('R004', 'U004', 'Chris456', 'T004', 'Scary!', 3, 'A decent horror movie, but not very scary.');
+INSERT INTO UserReviews (reviewID, userID, profileName, titleID, reviewSubject, reviewRating, reviewDescription) VALUES ('R005', 'U005', 'Taylor78', 'T005', 'Innovative', 4, 'A futuristic and innovative sci-fi film.');
+INSERT INTO UserReviews (reviewID, userID, profileName, titleID, reviewSubject, reviewRating, reviewDescription) VALUES ('R006', 'U003', 'Alex123', 'T006', 'Epic Drama', 5, 'A captivating fantasy series with rich characters.');
+
+
+-- Search History Inserts
+INSERT INTO SearchHistory (userID, profileName, mediaID, searchDate) VALUES ('U001', 'JohnDoe', 'MI001', TO_DATE('2024-06-10', 'YYYY-MM-DD'));
+INSERT INTO SearchHistory (userID, profileName, mediaID, searchDate) VALUES ('U002', 'JaneSmith', 'MI002', TO_DATE('2024-06-11', 'YYYY-MM-DD'));
+INSERT INTO SearchHistory (userID, profileName, mediaID, searchDate) VALUES ('U003', 'Alex123', 'MI003', TO_DATE('2024-06-12', 'YYYY-MM-DD'));
+
+-- Watch History Inserts
+INSERT INTO WatchHistory (userID, profileName, mediaID, watchDate, progress, isComplete) VALUES ('U001', 'JohnDoe', 'MI001', TO_DATE('2024-07-01', 'YYYY-MM-DD'), 148, 1);
+INSERT INTO WatchHistory (userID, profileName, mediaID, watchDate, progress, isComplete) VALUES ('U002', 'JaneSmith', 'MI002', TO_DATE('2024-07-02', 'YYYY-MM-DD'), 60, 0);
+INSERT INTO WatchHistory (userID, profileName, mediaID, watchDate, progress, isComplete) VALUES ('U003', 'Alex123', 'MI003', TO_DATE('2024-07-03', 'YYYY-MM-DD'), 169, 1);
+
