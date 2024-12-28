@@ -1,1 +1,2 @@
 # Streaming-Service-Database
+This project delivers a fully realized database solution for a streaming service. It involved moving from a broad project statement to a precise conceptual model to an eventual full implementation in Oracle SQL. Careful implementation of business requirements, modeling through an ERD, refining a relational schema, selecting suitable data types and constraints, and verifying through test data ensured a solid database product, showcasing successful data-driven decision making.
